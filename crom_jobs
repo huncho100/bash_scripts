@@ -1,0 +1,53 @@
+Scheduling jobs using cron:
+cron is a service that runs jobs
+Crond interprets 'crontab files'
+Crontab contains jobs and scheduled data, it enables edit to a crontab file
+Scheduling jobs with crontab:
+crontab -e — opens default crontab in editor
+job syntax:
+m h dom mon dow command — minute, hour, day of the month, month, day of the week, command.
+examples:
+m	h	dom	mon	dow	command
+30	15	*	*	0	date >> path/subdays.txt
+0	0	*	*	*	/cron_scripts/load_data.sh
+0	2	*	*	0	/cron_scripts/backup_data.sh
+0 	5 	* 	* 	1 	tar -zcf /var/backups/home.tgz /home/
+0 	21	 * 	* 	* 	echo "Welcome to cron" >> /tmp/echo.txt
+0 	0	 *	 * 	*	 /home/project/diskusage.sh >>/home/project/diskusage.log
+*	*	*	*	*	date >> /tmp/everymin.txt
+Saving job:
+Ctrl+x to exit editor
+Enter “y” to save your changes
+Click Enter to come out of crontab
+Listing jobs:
+crontab -l | tail -6
+Removing jobs:
+crontab -e — invoke the crontab, then add/remove cron job with editor 
+crontab -r — removes crontab, causing all your cron jobs to be removed
+Allowed values in crontab:
+Min	0-59
+Hour	0-23 (0 = midnight)
+Day	1-31
+Mnth	1-12
+DOW	0-6 (0 = Sunday)
+
+
+popular date format specifiers:
+%D		date in figures (03/9/2024)
+%d		day of the month (01 to 31)
+%h		abbreviated month name (Jan to Dec)
+%m		month of year (01 to 12)
+%Y		four-digit year
+%T		time in 24 hour format as HH:MM:SS
+%H		hour
+%j 		julian day of the year
+%A		day of the week
+Example:
+date +%D — Display date in figure
+hour=$(TZ='Nigeria/makurdi' date -u +%T)
+day=$(TZ='Nigeria/makurdi' date -u +%d)
+month=$(TZ='Nigeria/makurdi' date +%h)
+year=$(TZ='Nigeria/makurdi' date +%Y)
+date "+It's %A, the %j day of %Y!"
+
+
